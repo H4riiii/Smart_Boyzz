@@ -6,6 +6,7 @@ public class Main {
     static int mainChoice = 0;
     static int memberChoice = 0;
     static int fundChoice = 0;
+    static int storeChoice = 0;
 
     static void mainMenu(){
         System.out.println("======PTA MANAGEMENT SYSTEM======");
@@ -36,18 +37,29 @@ public class Main {
         fundChoice = sc.nextInt();
     }
 
+    static void storeMenu(){
+        System.out.println("========Store Menu========");
+        System.out.println("1. Deposit Fund");
+        System.out.println("2. Transfer Fund");
+        System.out.println("3. Fund Balance");
+        System.out.println("4. Transfer Records");
+        System.out.println("5. Go Back");
+        System.out.println("\nEnter your memberChoice : ");
+        storeChoice = sc.nextInt();
+    }
+
     public static void main(String[] args){
         System.out.println("             WELCOME!!!             \n"
                          + "           =============              ");
 
         while(mainChoice != 4){
             mainMenu();
-            switch (mainChoice){
-                case 1 :
-                    while(memberChoice != 3){
+            switch (mainChoice) {
+                case 1:
+                    while (memberChoice != 3) {
                         memberMenu();
-                        switch(memberChoice){
-                            case 1 :
+                        switch (memberChoice) {
+                            case 1:
                                 System.out.print("Enter ID : ");
                                 int id = sc.nextInt();
                                 sc.nextLine();
@@ -68,23 +80,57 @@ public class Main {
                                 int year = sc.nextInt();
 
                                 LocalDate expiry = LocalDate.of(year, month, day);
-                                ptaMembers member = new ptaMembers(id,name, parentOf, expiry);
+                                ptaMembers member = new ptaMembers(id, name, parentOf, expiry);
                                 member.addParent();
                                 break;
-                            case 2 :
+                            case 2:
                                 ptaMembers.showMembers();
                                 break;
-                            case 3 :
+                            case 3:
                                 System.out.println("Exiting...");
                                 break;
-                            default :
+                            default:
                                 System.out.println("Invalid Input!!!");
                                 break;
-
                         }
                     }
-                case 2 :
-
+                    break;
+                case 2:
+                    while (fundChoice != 5) {
+                        fundMenu();
+                        switch (fundChoice) {
+                            case 1:
+                                System.out.println("deposit");
+                                break;
+                            case 2:
+                                System.out.println("debit");
+                                break;
+                            case 3:
+                                System.out.println("balance");
+                                break;
+                            case 4:
+                                System.out.println("show");
+                                break;
+                            case 5:
+                                System.out.println("exiting");
+                                break;
+                            default:
+                                System.out.println("Invalid");
+                                break;
+                        }
+                    }
+                case 3:
+                    storeMenu();
+                    while (storeChoice != 4) {
+                        System.out.println("lol");
+                    }
+                    break;
+                case 4:
+                    System.out.println("Exiting...");
+                    break;
+                default:
+                    System.out.println("INVALID CHOICE!");
+                    break;
             }
         }
         sc.close();
