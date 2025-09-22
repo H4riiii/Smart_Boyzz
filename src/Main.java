@@ -14,7 +14,7 @@ public class Main {
         System.out.println("2. Fund management");
         System.out.println("3. Store management");
         System.out.println("4. Exit program");
-        System.out.println("Enter your memberChoice : ");
+        System.out.println("Enter your choice : ");
         mainChoice =  sc.nextInt();
     }
 
@@ -23,7 +23,7 @@ public class Main {
         System.out.println("1. Add members");
         System.out.println("2. Show members");
         System.out.println("3. Go Back");
-        System.out.print("\nEnter memberChoice : ");
+        System.out.print("\nEnter choice : ");
         memberChoice =  sc.nextInt();
     }
     static void fundMenu(){
@@ -33,25 +33,18 @@ public class Main {
         System.out.println("3. Fund Balance");
         System.out.println("4. Transfer Records");
         System.out.println("5. Go Back");
-        System.out.println("\nEnter your memberChoice : ");
+        System.out.println("\nEnter your choice : ");
         fundChoice = sc.nextInt();
     }
 
     static void storeMenu(){
         System.out.println("========Store Menu========");
-        System.out.println("1. Deposit Fund");
-        System.out.println("2. Transfer Fund");
-        System.out.println("3. Fund Balance");
-        System.out.println("4. Transfer Records");
-        System.out.println("5. Go Back");
-        System.out.println("\nEnter your memberChoice : ");
-        storeChoice = sc.nextInt();
+        System.out.println("IDK");
     }
 
     public static void main(String[] args){
         System.out.println("             WELCOME!!!             \n"
                          + "           =============              ");
-
         while(mainChoice != 4){
             mainMenu();
             switch (mainChoice) {
@@ -98,24 +91,32 @@ public class Main {
                 case 2:
                     while (fundChoice != 5) {
                         fundMenu();
+                        int amount;
                         switch (fundChoice) {
                             case 1:
-                                System.out.println("deposit");
+                                System.out.print("Enter the amount to deposit : ");
+                                amount = sc.nextInt();
+                                ptaFund.depositFund(amount);
                                 break;
                             case 2:
-                                System.out.println("debit");
+                                System.out.print("Enter the amount to transfer : ");
+                                amount = sc.nextInt();
+                                sc.nextLine();
+                                System.out.print("Enter the department to transfer amount : ");
+                                String dept = sc.nextLine();
+                                ptaFund.transferFund(amount, dept);
                                 break;
                             case 3:
-                                System.out.println("balance");
+                                ptaFund.showBalance();
                                 break;
                             case 4:
-                                System.out.println("show");
+                                ptaFund.transferHistory();
                                 break;
                             case 5:
-                                System.out.println("exiting");
+                                System.out.println("Going Back...");
                                 break;
                             default:
-                                System.out.println("Invalid");
+                                System.out.println("Invalid!!!");
                                 break;
                         }
                     }

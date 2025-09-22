@@ -4,12 +4,14 @@ import java.time.*;
 public class ptaFund{
     static private int fund = 0;
     static String transferStatement = "";
-    static List<String> transferRecord = new ArrayList<String>();
+    static List<String> transferRecord = new ArrayList<>();
 
     static void depositFund(int amount){
         fund += amount;
         Instant timestamp = Instant.now();
-        transferStatement = "+" + amount + "to funds at " + timestamp;
+        transferStatement = "+" + amount + " to funds at " + timestamp;
+        transferRecord.add(transferStatement);
+        transferStatement = "";
     }
 
     static void transferFund(int amount, String dept){
@@ -17,7 +19,7 @@ public class ptaFund{
             System.out.printf("$" + amount + "has been transferred to " + dept + " department.");
             fund -= amount;
             Instant timestamp = Instant.now();
-            transferStatement = "-" + amount + "to" +  dept + " at " + timestamp;
+            transferStatement = "- " + amount + " to " +  dept + " at " + timestamp;
             transferRecord.add(transferStatement);
             transferStatement = "";
         }
@@ -35,5 +37,7 @@ public class ptaFund{
         for(String str : transferRecord){
             System.out.println(str);
         }
+        System.out.print("The current balance is ");
+        showBalance();
     }
 }
