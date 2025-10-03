@@ -8,6 +8,23 @@ public class Main {
     static int fundChoice = 0;
     static int storeChoice = 0;
 
+    static String USERNAME;
+    static String PASS;
+
+    static boolean login(){
+        System.out.println("===========LOGIN===========");
+        System.out.print("Enter your User Name : ");
+        USERNAME = sc.nextLine();
+        System.out.print("Enter your Password : ");
+        PASS = sc.nextLine();
+        DBConnection db = new DBConnection(USERNAME, PASS);
+        if(db.getConnection() == null){
+            System.out.println("LOGIN FAILED!!!\n");
+            return false;
+        }
+        return true;
+    }
+
     static void mainMenu(){
         System.out.println("======PTA MANAGEMENT SYSTEM======");
         System.out.println("1. Member management");
@@ -39,12 +56,30 @@ public class Main {
 
     static void storeMenu(){
         System.out.println("========Store Menu========");
-        System.out.println("IDK");
+        System.out.println("1. Add Stock");
+        System.out.println("2. Remove Stock");
+        System.out.println("3. Show Stock");
+        System.out.println("4. Go Back");
+        System.out.println("\nEnter your choice : ");
+        storeChoice = sc.nextInt();
     }
 
     public static void main(String[] args){
         System.out.println("             WELCOME!!!             \n"
                          + "           =============              ");
+        int loginCount = 4;
+        while(loginCount != -1){
+            if(!login()){
+                loginCount--;
+            }
+            else{
+                break;
+            }
+            if(loginCount == 0){
+                System.out.println("LOGIN ATTEMPT FAILED!!!\nPROGRAM TERMINATING!!!");
+                return;
+            }
+        }
         while(mainChoice != 4){
             mainMenu();
             switch (mainChoice) {
@@ -120,12 +155,17 @@ public class Main {
                                 break;
                         }
                     }
-                case 3:
+                case 3:/*
                     storeMenu();
                     while (storeChoice != 4) {
-                        System.out.println("lol");
+                        storeMenu();
+                        switch (storeChoice){
+                            case 1:
+
+                                break;
+                        }
                     }
-                    break;
+                    break;*/
                 case 4:
                     System.out.println("Exiting...");
                     break;
